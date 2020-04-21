@@ -9,7 +9,7 @@
     "start-dev": "node index.js",
     "serve": "nodemon index.js"
   },
-  "author": "",
+  "author": "amam mustofa",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^3.0.7",
