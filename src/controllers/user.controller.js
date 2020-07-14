@@ -4,13 +4,10 @@ const User = (() => {
     const register = async (req, res) => {
         // Create a new user
         try {
-            console.log('some here')
             const user = new userModel(req.body)
             console.log('presave')
             await user.save()
-            console.log(user)
             const token = await user.generateAuthToken()
-            console.log(token)
             res.status(201).send({ user, token })
         } catch (error) {
             res.status(400).send(error)
@@ -23,12 +20,12 @@ const User = (() => {
             const { email, password } = req.body
             const user = await userModel.findByCredentials(email, password)
             if (!user) {
-                return res.status(401).send({error: 'Login failed! Check your credentials'})
+                throw new Error('Login failed! Check your credentials')
             }
             const token = await user.generateAuthToken()
             res.send({ user, token })
         } catch (error) {
-            res.status(400).send(error)
+            res.status(401).send(error)
         }
     }
 
